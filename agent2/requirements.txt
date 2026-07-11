@@ -7,3 +7,5 @@ langchain-google-genai
 fastapi
 uvicorn
 pydantic
+python-multipart
+pytesseract 

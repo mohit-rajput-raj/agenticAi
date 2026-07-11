@@ -6,16 +6,11 @@ from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain.agents import create_agent
 from langchain_core.tools import tool
+# from langchain.memory import InMemorySaver
 from pydantic import BaseModel , Field
 load_dotenv()
 
 
-
-class Movie(BaseModel):
-    name : str = Field(description="name of the movie")
-    rating : int = Field(description="rating of the movie")
-    year : int = Field(description="year of the movie")
-    genre : str = Field(description="genre of the movie")
 
 chat_model = init_chat_model(
     model="gemini-2.5-flash",
@@ -25,9 +20,9 @@ chat_model = init_chat_model(
 agent = create_agent(
     model=chat_model,
     tools=[],
-    response_format=Movie,
+   
 )
 
 response = agent.invoke({"messages": [{"role": "user", "content": "Tell me about a movir promethuse"}]})
 movie_info = response['structured_response']
-print(movie_info.year)
+print(movie_info)
